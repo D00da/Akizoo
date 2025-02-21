@@ -5,13 +5,39 @@ class No:
         self.altura = 1
         self.sim = sim  # Esquerda
         self.nao = nao  # Direita
+        self.anterior = None
+        self.proximo = None
+
+
+class Lista:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def inserir(self, no):
+        if not self.head:
+            self.head = no
+            return
+        elif not self.head.proximo:
+            self.head.proximo = no
+            self.tail = no
+            return
+        self.tail.proximo = no
+        no.anterior = self.tail
+        self.tail = no
+
+    def exibir(self):
+        atual = self.head
+        while atual:
+            print(atual.pergunta)
+            atual = atual.proximo
 
 
 class Akinator:
     def __init__(self):
         self.root = None
-        self.pilha = []  # Pilha para registrar tentativas
-        self.fila = []  # Fila para gerenciar interações
+        lista = Lista()
+        self.lista = lista
 
     def inserir(self, root, id, pergunta):
         if root is None:
@@ -111,7 +137,7 @@ class Akinator:
 
     def obter_no_minimo(self, root):
         if root is None or root.sim is None:
-            return no
+            return root
         return self.obter_no_minimo(root.sim)
 
     # def mostrar_arvore(self, root, nivel=0):
@@ -144,6 +170,7 @@ class Akinator:
 
         if root.sim is None and root.nao is None:
             print("Você pensou em: " + root.pergunta)
+            self.lista.inserir(root)
             opcao = input('Acertei ? (s/n):')
             opcao = opcao.lower()
             match opcao:
@@ -157,8 +184,7 @@ class Akinator:
             return
 
         resposta = input(root.pergunta + " (s/n): ")
-        self.fila.append(root)  # Adiciona à fila de interações
-        self.pilha.append(root)  # Adiciona à pilha de tentativas
+        self.lista.inserir(root)
 
         if resposta.lower() == 's':
             if root.sim is not None:
@@ -175,11 +201,9 @@ def menu():
     akinator = Akinator()
     nos = [
         (4, "É um mamífero ?"), (2, "É um primata ?"), (1, "Macaco"),
-        (3, "Cachorro"), (6, "É um réptil ?"), (7, "Lagarto"), (5, "Sapo")]
+        (3, "Cachorro"), (6, "É um réptil ?"), (5, "Lagarto"), (7, "Sapo")]
     for id, pergunta in nos:
-        print(id, pergunta)
         akinator.root = akinator.inserir(akinator.root, id, pergunta)
-        print(akinator.root.pergunta)
 
     while True:
         print("=-" * 10)
@@ -200,7 +224,8 @@ def menu():
                 print("1 - Mostrar árvore (PRE-ORDER)")
                 print("2 - Mostrar árvore (IN-ORDER)")
                 print("3 - Mostrar árvore (POST-ORDER)")
-                print("4 - Sair")
+                print("4 - Lista de interações")
+                print("5 - Sair")
                 opcao = input("O que deseja fazer ? ")
                 match opcao:
                     case '1':
@@ -210,6 +235,8 @@ def menu():
                     case '3':
                         akinator.post_order(akinator.root)
                     case '4':
+                        akinator.lista.exibir()
+                    case '5':
                         print("Saindo...")
                     case _:
                         print("Opção inválida! Saindo do Menu de Debug!")

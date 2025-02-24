@@ -1,22 +1,17 @@
 from Akinator import Akinator
+from Nos import nos
 
 def menu():
     akinator = Akinator()
-    nos = [(1, "Humano"), (2, "É um hominídeo ?"), (3, "Macaco"), (4, "É um primata ?"), (5, "Gato"),
-            (6, "É um felino ?"), (7, "Cachorro"), (8, "É um carnivora ?"), (9, "Baleia"), (10, "É aquático ?"),
-            (11, "Cavalo"), (12, "É um placentário ?"), (13, "Canguru"), (14, "É um marsupial ?"), (15, "Ornitorrinco"),
-            (16, "É um mamífero ?"), (17, "Tartaruga"), (18, "Tem casco ?"), (19, "Crocodilo"), (20, "É um crocodiliano ?"),
-            (21, "Lagarto"), (22, "Tem patas ?"), (23, "Cobra"), (24, "É um réptil ?"), (25, "Salamandra"),
-            (26, "Tem cauda ?"), (27, "Sapo"), (28, "É um anfíbio ?"), (29, "Galinha"), (30, "É um neognata ?"),
-            (31, "Avestruz"), (32, "É uma ave ?"), (33, "Tilápia"), (34, "É um peixe ósseo ?"), (35, "Tubarão")]
+    nodos = nos()
 
-    for id, pergunta in nos:
+    for id, pergunta in nodos:
         akinator.root = akinator.inserir(akinator.root, id, pergunta)
 
     while True:
-        print("=-" * 10)
-        print("Akinator da Shopee")
-        print("=-" * 10)
+        print("=-" * 15)
+        print("Akizoo (Akinator de Animais)")
+        print("=-" * 15)
         print("1 - Começar Jogo")
         print("2 - Menu de Debug")
         print("3 - Sair")
@@ -46,8 +41,6 @@ def menu():
                         akinator.lista.exibir()
                     case '5':
                         print("Saindo...")
-                    case '6':
-                        akinator.mostrar_arvore(akinator.root)
                     case _:
                         print("Opção inválida! Saindo do Menu de Debug!")
             case '3':

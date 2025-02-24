@@ -1,9 +1,10 @@
 def nos():
-    nos = [(1, "Humano"), (2, "É um hominídeo ?"), (3, "Macaco"), (4, "É um primata ?"), (5, "Gato"),
-            (6, "É um felino ?"), (7, "Cachorro"), (8, "É um carnivora ?"), (9, "Baleia"), (10, "É aquático ?"),
-            (11, "Cavalo"), (12, "É um placentário ?"), (13, "Canguru"), (14, "É um marsupial ?"), (15, "Ornitorrinco"),
-            (16, "É um mamífero ?"), (17, "Tartaruga"), (18, "Tem casco ?"), (19, "Crocodilo"), (20, "É um crocodiliano ?"),
-            (21, "Lagarto"), (22, "Tem patas ?"), (23, "Cobra"), (24, "É um réptil ?"), (25, "Salamandra"),
-            (26, "Tem cauda ?"), (27, "Sapo"), (28, "É um anfíbio ?"), (29, "Galinha"), (30, "É um neognata ?"),
-            (31, "Avestruz"), (32, "É uma ave ?"), (33, "Tilápia"), (34, "É um peixe ósseo ?"), (35, "Tubarão")]
+    nos = [(1, "Gato"), (2, "É de pequeno porte ?"), (3, "Leão"), (4, "É um felino ?"), (5, "Cachorro"),
+           (6, "É um canídeo ?"), (7, "Urso"), (8, "É um carnivora ?"), (9, "Homem"), (10, "É um hominídeo ?"),
+           (11, "Macaco"), (12, "É um primata ?"), (13, "Baleia"), (14, "É aquático ?"), (15, "Cavalo"),
+           (16, "É um mamífero ?"), (17, "Largato"), (18, "Tem patas ?"), (19, "Cobra"),
+           (20, "É um squamata ?"),
+           (21, "Tartaruga"), (22, "Tem casco ?"), (23, "Crocodilo"), (24, "É um réptil ?"), (25, "Galinha"),
+           (26, "É um neognata ?"), (27, "Avestruz"), (28, "É uma ave ?"), (29, "Salamandra"), (30, "Tem cauda ?"),
+           (31, "Sapo"), (32, "É um anfíbio ?"), (33, "Tilápia"), (34, "É um peixe ósseo ?"), (35, "Tubarão")]
     return nos

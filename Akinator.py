@@ -8,7 +8,6 @@ class No:
         self.anterior = None
         self.proximo = None
 
-
 class Lista:
     def __init__(self):
         self.head = None
@@ -31,7 +30,6 @@ class Lista:
         while atual:
             print(atual.pergunta)
             atual = atual.proximo
-
 
 class Akinator:
     def __init__(self):
@@ -165,7 +163,7 @@ class Akinator:
         if root.sim is None and root.nao is None:
             print("Você pensou em: " + root.pergunta)
             self.lista.inserir(root)
-            opcao = input('Acertei ? (s/n):')
+            opcao = input('Acertei ? (s/n): ')
             opcao = opcao.lower()
             match opcao:
                 case 's':
@@ -189,62 +187,3 @@ class Akinator:
         else:
             print('Input inválido!')
             self.interacao(root)
-
-def menu():
-    akinator = Akinator()
-    nos = [(1, "Gato"), (2, "É de pequeno porte ?"), (3, "Leão"), (4, "É um felino ?"), (5, "Cachorro"),
-           (6, "É um canídeo ?"), (7, "Urso"), (8, "É um carnivora ?"), (9, "Homem"), (10, "É um hominídeo ?"),
-           (11, "Macaco"), (12, "É um primata ?"), (13, "Baleia"), (14, "É aquático ?"), (15, "Cavalo"),
-           (16, "É um mamífero ?"), (17, "Largato"), (18, "Tem patas ?"), (19, "Cobra"),
-           (20, "É um squamata ?"),
-           (21, "Tartaruga"), (22, "Tem casco ?"), (23, "Crocodilo"), (24, "É um réptil ?"), (25, "Galinha"),
-           (26, "É um neognata ?"), (27, "Avestruz"), (28, "É uma ave ?"), (29, "Salamandra"), (30, "Tem cauda ?"),
-           (31, "Sapo"), (32, "É um anfíbio ?"), (33, "Tilápia"), (34, "É um peixe ósseo ?"), (35, "Tubarão")]
-
-    for id, pergunta in nos:
-        akinator.root = akinator.inserir(akinator.root, id, pergunta)
-
-    while True:
-        print("=-" * 15)
-        print("Akizoo (Akinator de Animais)")
-        print("=-" * 15)
-        print("1 - Começar Jogo")
-        print("2 - Menu de Debug")
-        print("3 - Sair")
-        opcao = input("O que deseja fazer ? ")
-
-        match opcao:
-            case '1':
-                akinator.interacao(akinator.root)
-            case '2':
-                print("=-" * 10)
-                print("Menu de Debug")
-                print("=-" * 10)
-                print("1 - Mostrar árvore (PRE-ORDER)")
-                print("2 - Mostrar árvore (IN-ORDER)")
-                print("3 - Mostrar árvore (POST-ORDER)")
-                print("4 - Lista de interações")
-                print("5 - Sair")
-                opcao = input("O que deseja fazer ? ")
-                match opcao:
-                    case '1':
-                        akinator.pre_order(akinator.root)
-                    case '2':
-                        akinator.in_order(akinator.root)
-                    case '3':
-                        akinator.post_order(akinator.root)
-                    case '4':
-                        akinator.lista.exibir()
-                    case '5':
-                        print("Saindo...")
-                    case _:
-                        print("Opção inválida! Saindo do Menu de Debug!")
-            case '3':
-                print("Saindo...")
-                break
-            case _:
-                print("Opção inválida")
-
-
-if __name__ == "__main__":
-    menu()

@@ -44,31 +44,28 @@ class Akinator:
             return No(id, pergunta)
 
         if id < root.id:
-            if root.sim is None:
-                root.sim = No(id, pergunta)
-            else:
-                self.inserir(root.sim, id, pergunta)
+            root.sim = self.inserir(root.sim, id, pergunta)
         else:
-            if root.nao is None:
-                root.nao = No(id, pergunta)
-            else:
-                self.inserir(root.nao, id, pergunta)
-
+            root.nao = self.inserir(root.nao, id, pergunta)
+            
         root.altura = 1 + max(self.obter_altura(root.sim), self.obter_altura(root.nao))
 
         fator_balanceamento = self.obter_balanceamento(root)
 
         if fator_balanceamento > 1 and id < root.sim.id:
             return self.rotacionar_direita(root)
+
         if fator_balanceamento < -1 and id > root.nao.id:
             return self.rotacionar_esquerda(root)
+            
         if fator_balanceamento > 1 and id > root.sim.id:
             root.sim = self.rotacionar_esquerda(root.sim)
             return self.rotacionar_direita(root)
+
         if fator_balanceamento < -1 and id < root.nao.id:
             root.nao = self.rotacionar_direita(root.nao)
             return self.rotacionar_esquerda(root)
-
+            
         return root
 
     def remover(self, root, id):
@@ -140,11 +137,11 @@ class Akinator:
             return root
         return self.obter_no_minimo(root.sim)
 
-    # def mostrar_arvore(self, root, nivel=0):
-    # if root is not None:
-    # print(" " * (nivel * 4) + f"{root.pergunta}")
-    # self.mostrar_arvore(root.sim, nivel + 1)
-    # self.mostrar_arvore(root.nao, nivel + 1)
+    def mostrar_arvore(self, root, nivel=0):
+        if root is not None:
+            print(" " * (nivel * 4) + f"{root.id},{root.pergunta}")
+            self.mostrar_arvore(root.sim, nivel + 1)
+            self.mostrar_arvore(root.nao, nivel + 1)
 
     def pre_order(self, root):
         if root:
@@ -196,12 +193,16 @@ class Akinator:
             print('Input inválido!')
             self.interacao(root)
 
-
 def menu():
     akinator = Akinator()
-    nos = [
-        (4, "É um mamífero ?"), (2, "É um primata ?"), (1, "Macaco"),
-        (3, "Cachorro"), (6, "É um réptil ?"), (5, "Lagarto"), (7, "Sapo")]
+    nos = [(1, "Humano"), (2, "É um hominídeo ?"), (3, "Macaco"), (4, "É um primata ?"), (5, "Gato"),
+            (6, "É um felino ?"), (7, "Cachorro"), (8, "É um carnivora ?"), (9, "Baleia"), (10, "É aquático ?"),
+            (11, "Cavalo"), (12, "É um placentário ?"), (13, "Canguru"), (14, "É um marsupial ?"), (15, "Ornitorrinco"),
+            (16, "É um mamífero ?"), (17, "Tartaruga"), (18, "Tem casco ?"), (19, "Crocodilo"), (20, "É um crocodiliano ?"),
+            (21, "Lagarto"), (22, "Tem patas ?"), (23, "Cobra"), (24, "É um réptil ?"), (25, "Salamandra"),
+            (26, "Tem cauda ?"), (27, "Sapo"), (28, "É um anfíbio ?"), (29, "Galinha"), (30, "É um neognata ?"),
+            (31, "Avestruz"), (32, "É uma ave ?"), (33, "Tilápia"), (34, "É um peixe ósseo ?"), (35, "Tubarão")]
+
     for id, pergunta in nos:
         akinator.root = akinator.inserir(akinator.root, id, pergunta)
 
@@ -238,6 +239,8 @@ def menu():
                         akinator.lista.exibir()
                     case '5':
                         print("Saindo...")
+                    case '6':
+                        akinator.mostrar_arvore(akinator.root)
                     case _:
                         print("Opção inválida! Saindo do Menu de Debug!")
             case '3':

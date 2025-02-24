@@ -173,21 +173,21 @@ class Akinator:
 
     def pre_order(self, root, nivel=0):
         if root:
-            print(" " * (nivel * 4) + f"{root.id},{root.pergunta}")
+            print(" " * (nivel * 4) + f"{root.pergunta}")
             self.pre_order(root.sim, nivel + 1)
             self.pre_order(root.nao, nivel + 1)
 
     def in_order(self, root, nivel=0):
         if root:
             self.in_order(root.sim, nivel + 1)
-            print(" " * (nivel * 4) + f"{root.id},{root.pergunta}")
+            print(" " * (nivel * 4) + f"{root.pergunta}")
             self.in_order(root.nao, nivel + 1)
 
     def post_order(self, root, nivel=0):
         if root:
             self.post_order(root.sim, nivel + 1)
             self.post_order(root.nao, nivel + 1)
-            print(" " * (nivel * 4) + f"{root.id},{root.pergunta}")
+            print(" " * (nivel * 4) + f"{root.pergunta}")
 
     def userInput(self, root):
         if root is None:

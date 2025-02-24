@@ -38,7 +38,9 @@ def menu():
                     case '3':
                         akinator.post_order(akinator.root)
                     case '4':
+                        print("Tentativas do programa")
                         akinator.tentativas.exibir()
+                        print("Interações do usuário")
                         akinator.interacoes.exibir()
                     case '5':
                         print("Saindo...")

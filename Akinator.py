@@ -8,7 +8,14 @@ class No:
         self.anterior = None
         self.proximo = None
 
-class Lista:
+class Interacao:
+    def __init__(self, tipo):
+        self.tipo = tipo
+        self.proximo = None
+        self.anterior = None
+
+#Armazenar tentativas de adivinhação
+class Tentativas:
     def __init__(self):
         self.head = None
         self.tail = None
@@ -31,11 +38,37 @@ class Lista:
             print(atual.pergunta)
             atual = atual.proximo
 
+#Armazenar as interações em tempo real
+class Interacoes:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def inserir(self, no):
+        if not self.head:
+            self.head = no
+            return
+        elif not self.head.proximo:
+            self.head.proximo = no
+            self.tail = no
+            return
+        self.tail.proximo = no
+        no.anterior = self.tail
+        self.tail = no
+
+    def exibir(self):
+        atual = self.head
+        while atual:
+            print(atual.tipo)
+            atual = atual.proximo
+
 class Akinator:
     def __init__(self):
         self.root = None
-        lista = Lista()
-        self.lista = lista
+        tentativas = Tentativas()
+        self.tentativas = tentativas
+        interacoes = Interacoes()
+        self.interacoes = interacoes
 
     def inserir(self, root, id, pergunta):
         if root is None:
@@ -156,34 +189,38 @@ class Akinator:
             self.post_order(root.nao, nivel + 1)
             print(" " * (nivel * 4) + f"{root.id},{root.pergunta}")
 
-    def interacao(self, root):
+    def userInput(self, root):
         if root is None:
             return
 
         if root.sim is None and root.nao is None:
             print("Você pensou em: " + root.pergunta)
-            self.lista.inserir(root)
+            self.tentativas.inserir(root)
             opcao = input('Acertei ? (s/n): ')
             opcao = opcao.lower()
             match opcao:
                 case 's':
                     print("Agradeço por jogar!")
+                    self.interacoes.inserir(Interacao("Sim"))
                 case 'n':
                     resposta = input("No que você pensou ? ")
+                    self.interacoes.inserir(Interacao("Não"))
                     temp = root.id
                     self.remover(self.root, root.id)
                     self.inserir(self.root, temp, resposta)
             return
 
         resposta = input(root.pergunta + " (s/n): ")
-        self.lista.inserir(root)
+        self.tentativas.inserir(root)
 
         if resposta.lower() == 's':
+            self.interacoes.inserir(Interacao("Sim"))
             if root.sim is not None:
-                self.interacao(root.sim)
+                self.userInput(root.sim)
         elif resposta.lower() == 'n':
+            self.interacoes.inserir(Interacao("Não"))
             if root.nao is not None:
-                self.interacao(root.nao)
+                self.userInput(root.nao)
         else:
             print('Input inválido!')
-            self.interacao(root)
+            self.userInput(root)

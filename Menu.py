@@ -19,7 +19,7 @@ def menu():
 
         match opcao:
             case '1':
-                akinator.interacao(akinator.root)
+                akinator.userInput(akinator.root)
             case '2':
                 print("=-" * 10)
                 print("Menu de Debug")
@@ -38,7 +38,8 @@ def menu():
                     case '3':
                         akinator.post_order(akinator.root)
                     case '4':
-                        akinator.lista.exibir()
+                        akinator.tentativas.exibir()
+                        akinator.interacoes.exibir()
                     case '5':
                         print("Saindo...")
                     case _:
